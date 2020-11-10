@@ -28,78 +28,11 @@ func main() {
 				input.Scan()
 				switch input.Text() {
 				case "1":
-					var playActions Actions
-					playActions.Name = "you"
-					playActions.Value = "1"
-					playres := TypeNameRes(playActions.Value)
-					fmt.Println(playActions.Name + "选择出" + playres)
-					airestmp := AIAction()
-					var AIActions Actions
-					AIActions.Name = "AI"
-					AIActions.Value = airestmp
-					aires := TypeNameRes(AIActions.Value)
-					fmt.Println(AIActions.Name + "选择出" + aires)
-					res := JudgeRes(playActions, AIActions)
-					if len(res) > 1 {
-						fmt.Println("双方平局")
-						winwin = winwin + 1
-					} else {
-						fmt.Println("winner is " + res[0].Name)
-						if res[0].Name == "you" {
-							playwin = playwin + 1
-						} else {
-							aiwin = aiwin + 1
-						}
-					}
-
+					Level1Game("1", &playwin, &aiwin, &winwin)
 				case "2":
-					var playActions Actions
-					playActions.Name = "you"
-					playActions.Value = "2"
-					playres := TypeNameRes(playActions.Value)
-					fmt.Println(playActions.Value + "选择出" + playres)
-					airestmp := AIAction()
-					var AIActions Actions
-					AIActions.Name = "AI"
-					AIActions.Value = airestmp
-					aires := TypeNameRes(AIActions.Value)
-					fmt.Println(AIActions.Name + "选择出" + aires)
-					res := JudgeRes(playActions, AIActions)
-					if len(res) > 1 {
-						fmt.Println("双方平局")
-						winwin = winwin + 1
-					} else {
-						fmt.Println("winner is " + res[0].Name)
-						if res[0].Name == "you" {
-							playwin = playwin + 1
-						} else {
-							aiwin = aiwin + 1
-						}
-					}
+					Level1Game("2", &playwin, &aiwin, &winwin)
 				case "3":
-					var playActions Actions
-					playActions.Name = "you"
-					playActions.Value = "3"
-					playres := TypeNameRes(playActions.Value)
-					fmt.Println(playActions.Value + "选择出" + playres)
-					airestmp := AIAction()
-					var AIActions Actions
-					AIActions.Name = "AI"
-					AIActions.Value = airestmp
-					aires := TypeNameRes(AIActions.Value)
-					fmt.Println(AIActions.Name + "选择出" + aires)
-					res := JudgeRes(playActions, AIActions)
-					if len(res) > 1 {
-						fmt.Println("双方平局")
-						winwin = winwin + 1
-					} else {
-						fmt.Println("winner is " + res[0].Name)
-						if res[0].Name == "you" {
-							playwin = playwin + 1
-						} else {
-							aiwin = aiwin + 1
-						}
-					}
+					Level1Game("3", &playwin, &aiwin, &winwin)
 				default:
 					fmt.Println("无效指令")
 					i = i - 1
@@ -194,4 +127,30 @@ func JudgeRes(play1 Actions, play2 Actions) (winner []Actions) {
 	}
 
 	return winner
+}
+
+func Level1Game(playinput string, playwin *int, aiwin *int, winwin *int) {
+	var playActions Actions
+	playActions.Name = "you"
+	playActions.Value = playinput
+	playres := TypeNameRes(playActions.Value)
+	fmt.Println(playActions.Value + "选择出" + playres)
+	airestmp := AIAction()
+	var AIActions Actions
+	AIActions.Name = "AI"
+	AIActions.Value = airestmp
+	aires := TypeNameRes(AIActions.Value)
+	fmt.Println(AIActions.Name + "选择出" + aires)
+	res := JudgeRes(playActions, AIActions)
+	if len(res) > 1 {
+		fmt.Println("双方平局")
+		*winwin = *winwin + 1
+	} else {
+		fmt.Println("winner is " + res[0].Name)
+		if res[0].Name == "you" {
+			*playwin = *playwin + 1
+		} else {
+			*aiwin = *aiwin + 1
+		}
+	}
 }
