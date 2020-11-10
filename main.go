@@ -18,8 +18,8 @@ func main() {
 	input := bufio.NewScanner(os.Stdin)
 	for input.Scan() {
 		switch input.Text() {
-		case "start":
-			fmt.Println("let's fuck")
+		case "level1":
+			fmt.Println("fuck")
 			var playwin, aiwin, winwin int
 			playwin = 0
 			aiwin = 0
@@ -57,7 +57,7 @@ func main() {
 					playActions.Name = "you"
 					playActions.Value = "2"
 					playres := TypeNameRes(playActions.Value)
-					fmt.Println(playActions.Value + "选择出" + playres)
+					fmt.Println(playActions.Name + "选择出" + playres)
 					airestmp := AIAction()
 					var AIActions Actions
 					AIActions.Name = "AI"
@@ -81,7 +81,7 @@ func main() {
 					playActions.Name = "you"
 					playActions.Value = "3"
 					playres := TypeNameRes(playActions.Value)
-					fmt.Println(playActions.Value + "选择出" + playres)
+					fmt.Println(playActions.Name + "选择出" + playres)
 					airestmp := AIAction()
 					var AIActions Actions
 					AIActions.Name = "AI"
